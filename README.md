@@ -7,5 +7,5 @@
 - Step 3: LLM
 
 The are two helpers: 
- - rag_helper.py - the RAGBase class wrapping search, prompt building, and the LLM call
- - ingest.py - load_faq_data and build_index for loading the FAQ and building a minsearch index
+ - 'rag_helper.py' - the RAGBase class wrapping search, prompt building, and the LLM call
+ - 'ingest.py' - load_faq_data and build_index for loading the FAQ and building a minsearch index
