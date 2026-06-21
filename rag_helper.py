@@ -72,10 +72,32 @@ class RAGBase:
             input=input_messages
         )
 
-        return response.output_text
+        return (response.output_text, response.usage)
 
     def rag(self, query):
         search_results = self.search(query)
         prompt = self.build_prompt(query, search_results)
         answer = self.llm(prompt)
         return answer
+    
+
+
+class LessonRAG(RAGBase):
+    def search(self, query, num_results=5):
+        # # Override with the new lesson weights
+        # boost_dict = {'content': 3.0, 'filename': 0.5}
+
+
+        return self.index.search(
+            query,
+            num_results=num_results
+        )
+
+    def build_context(self, search_results):
+        # Override with the new document fields
+        lines = []
+        for doc in search_results:
+            lines.append(f"Filename: {doc['filename']}")
+            lines.append(f"Content: {doc['content']}")
+            lines.append('')
+        return '\n'.join(lines).strip()
